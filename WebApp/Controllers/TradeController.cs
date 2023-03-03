@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using XUnit.ServiceContracts;
+using XUnit.WebApp.Models;
 using XUnit.WebApp.Options;
 
 namespace XUnit.Controllers;
@@ -24,6 +25,12 @@ public class TradeController : Controller
         Dictionary<string, object>? companyProfile = await _finnhubService!.GetCompanyProfileAsync(_options!.DefaultStockSymbol!);
         Dictionary<string, object>? stockPriceQuote = await _finnhubService!.GetStockPriceQuoteAsync(_options.DefaultStockSymbol!)!;
 
-        return View();
+        return View(new StockTrade()
+            {
+                StockSymbol = _options.DefaultStockSymbol,
+                StockName = companyProfile!["name"].ToString(),
+                Quantity = 10,
+                Price = Convert.ToInt32(stockPriceQuote!["c"].ToString())
+            });
     }
 }
