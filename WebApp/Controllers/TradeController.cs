@@ -10,7 +10,7 @@ public class TradeController : Controller
     private readonly TradeOptions? _options;
     private readonly IFinnhubService? _finnhubService;
     private readonly IStockService? _stockService;
-    
+
     public TradeController(IOptions<TradeOptions> options, IFinnhubService finnhubService, IStockService stockService)
     {
         _finnhubService = finnhubService;
@@ -18,9 +18,12 @@ public class TradeController : Controller
         _options = options.Value;
     }
 
-    [Route("/")]
-    public IActionResult Index()
+    [Route("trade")]
+    public async Task<IActionResult> IndexAsync()
     {
+        Dictionary<string, object>? companyProfile = await _finnhubService!.GetCompanyProfileAsync(_options!.DefaultStockSymbol!);
+        Dictionary<string, object>? stockPriceQuote = await _finnhubService!.GetStockPriceQuoteAsync(_options.DefaultStockSymbol!)!;
+
         return View();
     }
 }
