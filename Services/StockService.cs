@@ -17,9 +17,12 @@ public class StockService : IStockService
         if(buyOrderRequest == null)
             throw new ArgumentNullException();
 
-        if(buyOrderRequest.Quantity < 1)
+        if(buyOrderRequest.Quantity < 1 || buyOrderRequest.Quantity > 100000)
             throw new ArgumentException();
-            
+
+        if(buyOrderRequest.Price < 1 || buyOrderRequest.Price > 10000)
+            throw new ArgumentException();
+
         await Task.CompletedTask;
         return null;
     }

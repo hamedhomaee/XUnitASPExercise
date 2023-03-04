@@ -52,4 +52,54 @@ public class StockServiceTests
         });
     }
     #endregion
+
+    #region CreateBuyOrderAsync_BuyOrderRequestQuantityMoreThanHundredThousandOne_ThrowsArgumentException
+    [Fact]
+    public async Task CreateBuyOrderAsync_BuyOrderRequestQuantityMoreThanHundredThousandOne_ThrowsArgumentException()
+    {
+        // Arrange
+        IBuyOrderRequest buyOrderRequest = new();
+        buyOrderRequest.Quantity = 100001;
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+        {
+            await _stockService.CreateBuyOrderAsync(buyOrderRequest);
+        });
+    }
+    #endregion
+
+    #region CreateBuyOrderAsync_BuyOrderRequestPriceLessThanOne_ThrowsArgumentException
+    [Fact]
+    public async Task CreateBuyOrderAsync_BuyOrderRequestPriceLessThanOne_ThrowsArgumentException()
+    {
+        // Arrange
+        IBuyOrderRequest buyOrderRequest = new();
+        buyOrderRequest.Quantity = 5;
+        buyOrderRequest.Price = 0;
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+        {
+            await _stockService.CreateBuyOrderAsync(buyOrderRequest);
+        });
+    }
+    #endregion
+
+    #region CreateBuyOrderAsync_BuyOrderRequestPriceLessMoreThanTenThousandOne_ThrowsArgumentException
+    [Fact]
+    public async Task CreateBuyOrderAsync_BuyOrderRequestPriceMoreThanTenThousandThanOne_ThrowsArgumentException()
+    {
+        // Arrange
+        IBuyOrderRequest buyOrderRequest = new();
+        buyOrderRequest.Quantity = 5;
+        buyOrderRequest.Price = 10001;
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+        {
+            await _stockService.CreateBuyOrderAsync(buyOrderRequest);
+        });
+    }
+    #endregion
 }
