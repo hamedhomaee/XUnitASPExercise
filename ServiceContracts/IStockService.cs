@@ -4,11 +4,11 @@ namespace XUnit.ServiceContracts;
 
 public interface IStockService
 {
-    Task<IBuyOrderResponse> CreateBuyOrderAsync(IBuyOrderRequest? buyOrderRequest);
+    Task<IBuyOrderResponse?> CreateBuyOrderAsync(IBuyOrderRequest? buyOrderRequest);
 
-    Task<ISellOrderResponse> CreateSellOrderAsync(ISellOrderRequest? sellOrderRequest);
+    Task<ISellOrderResponse?> CreateSellOrderAsync(ISellOrderRequest? sellOrderRequest);
 
-    Task<List<IBuyOrderResponse>> GetBuyOrdersAsync();
+    Task<List<IBuyOrderResponse?>> GetBuyOrdersAsync();
 
-    Task<List<ISellOrderResponse>> GetSellOrdersAsync();
+    Task<List<ISellOrderResponse?>> GetSellOrdersAsync();
 }

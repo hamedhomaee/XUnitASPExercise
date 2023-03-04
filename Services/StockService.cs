@@ -1,3 +1,4 @@
+using XUnit.Entities;
 using XUnit.ServiceContracts;
 using XUnit.ServiceContracts.DTO;
 
@@ -5,23 +6,46 @@ namespace XUnit.Services;
 
 public class StockService : IStockService
 {
-    public Task<IBuyOrderResponse> CreateBuyOrderAsync(IBuyOrderRequest? buyOrderRequest)
-    {
-        throw new NotImplementedException();
-    }
+    #region PrivateFields
+    private List<BuyOrder>? buyOrders;
+    private List<SellOrder>? sellOrders;
+    #endregion
 
-    public Task<ISellOrderResponse> CreateSellOrderAsync(ISellOrderRequest? sellOrderRequest)
+    #region CreateBuyOrderAsync
+    public async Task<IBuyOrderResponse?> CreateBuyOrderAsync(IBuyOrderRequest? buyOrderRequest)
     {
-        throw new NotImplementedException();
-    }
+        if(buyOrderRequest == null)
+            throw new ArgumentNullException();
 
-    public Task<List<IBuyOrderResponse>> GetBuyOrdersAsync()
-    {
-        throw new NotImplementedException();
+        if(buyOrderRequest.Quantity < 1)
+            throw new ArgumentException();
+            
+        await Task.CompletedTask;
+        return null;
     }
+    #endregion
 
-    public Task<List<ISellOrderResponse>> GetSellOrdersAsync()
+    #region CreateSellOrderAsync
+    public async Task<ISellOrderResponse?> CreateSellOrderAsync(ISellOrderRequest? sellOrderRequest)
     {
+        await Task.CompletedTask;
         throw new NotImplementedException();
     }
+    #endregion
+
+    #region GetBuyOrderAsync
+    public async Task<List<IBuyOrderResponse?>> GetBuyOrdersAsync()
+    {
+        await Task.CompletedTask;
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region GetSellOrderAsync
+    public async Task<List<ISellOrderResponse?>> GetSellOrdersAsync()
+    {
+        await Task.CompletedTask;
+        throw new NotImplementedException();
+    }
+    #endregion
 }
